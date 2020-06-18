@@ -21,43 +21,13 @@ import { useStatusBarEffect } from '../navigation';
 
 export const BTMain = () => {
   useStatusBarEffect('light-content');
-  const navigation = useNavigation();
   const { authorizationStatus, requestENAuthorization } = useContext(ExposureNotificationsContext);
   console.log("Auth status: ", authorizationStatus);
-  const [trackingInfo, setTrackingInfo] = useState({ canTrack: authorizationStatus === 'authorized' });
 
-  const updateStateInfo = useCallback(async () => {
-    setTrackingInfo({ canTrack: authorizationStatus === 'authorized' });
-  }, [authorizationStatus, setTrackingInfo]);
-
-  useEffect(() => {
-    updateStateInfo();
-    // refresh state if user backgrounds app
-    AppState.addEventListener('change', updateStateInfo);
-
-    // refresh state if settings change
-    const unsubscribe = navigation.addListener('focus', updateStateInfo);
-
-    // handle back press
-    BackHandler.addEventListener('hardwareBackPress', handleBackPress);
-
-    return () => {
-      AppState.removeEventListener('change', updateStateInfo);
-      BackHandler.removeEventListener('hardwareBackPress', handleBackPress);
-      unsubscribe();
-    };
-  }, [navigation, updateStateInfo]);
-
-  const handleBackPress = () => {
-    BackHandler.exitApp(); // works best when the goBack is async
-    return true;
-  };
-
-  
-  if (!trackingInfo.canTrack) {
-    return <TracingOffScreen onPress={requestENAuthorization} />;
-  } else {
+  if (authorizationStatus === 'ENABLED') {
     return <AllServicesOnScreen />;
+  } else {
+    return <TracingOffScreen onPress={requestENAuthorization} />;
   }
 };
 
