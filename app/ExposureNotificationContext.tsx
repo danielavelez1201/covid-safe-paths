@@ -10,7 +10,7 @@ export type DeviceStatus = [Authorization, Enablement];
 interface ExposureNotificationsState {
   deviceStatus: DeviceStatus;
   requestENAuthorization: () => void;
-  getIsENAuthorizedAndEnabled: () => boolean;
+  isENAuthorizedAndEnabled: () => boolean;
 }
 
 const initialStatus: DeviceStatus = ['UNAUTHORIZED', 'DISABLED'];
@@ -18,7 +18,7 @@ const initialStatus: DeviceStatus = ['UNAUTHORIZED', 'DISABLED'];
 const initialState = {
   deviceStatus: initialStatus,
   requestENAuthorization: () => {},
-  getIsENAuthorizedAndEnabled: () => false,
+  isENAuthorizedAndEnabled: () => false,
 };
 
 const ExposureNotificationsContext = createContext<ExposureNotificationsState>(
@@ -53,8 +53,7 @@ const ExposureNotificationsProvider = ({
     BTNativeModule.requestAuthorization(cb);
   };
 
-  const getIsENAuthorizedAndEnabled = () => {
-    console.log(deviceStatus);
+  const isENAuthorizedAndEnabled = () => {
     return deviceStatus[0] === 'AUTHORIZED' && deviceStatus[1] === 'ENABLED';
   };
 
@@ -63,7 +62,7 @@ const ExposureNotificationsProvider = ({
       value={{
         deviceStatus,
         requestENAuthorization,
-        getIsENAuthorizedAndEnabled,
+        isENAuthorizedAndEnabled,
       }}>
       {children}
     </ExposureNotificationsContext.Provider>
