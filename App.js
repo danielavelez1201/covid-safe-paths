@@ -22,7 +22,7 @@ export const UnconnectedApp = () => (
         {isGPS ? (
           <PermissionsProvider>
             <ExposureHistoryProvider>
-            <Entry />
+              <Entry />
             </ExposureHistoryProvider>
           </PermissionsProvider>
         ) : (

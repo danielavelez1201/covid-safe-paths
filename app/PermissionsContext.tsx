@@ -96,7 +96,7 @@ const PermissionsProvider = ({
       const isDev = __DEV__;
       await Promise.all([
         checkLocationPermission(),
-        isiOS? checkNotificationPermission() : null,
+        isiOS ? checkNotificationPermission() : null,
         // TODO(https://pathcheck.atlassian.net/browse/SAF-232): Put HCA auto sub logic behind a feature flag
         isDev && isiOS ? checkAuthSubscriptionPermission() : null,
       ]);

@@ -158,7 +158,7 @@ exports[`tracing off screen matches snapshot 1`] = `
           accessibilityLabel="Allow Location Access"
           accessibilityRole="button"
           accessible={true}
-          focusable={true}
+          focusable={false}
           isTVSelectable={true}
           style={
             Object {

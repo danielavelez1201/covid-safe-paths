@@ -29,7 +29,6 @@ export const BTMain = () => {
     requestENAuthorization,
     deviceStatus,
   } = useContext(ExposureNotificationsContext);
-  console.log('Auth status: ', getIsENAuthorizedAndEnabled());
 
   useEffect(() => {
     console.log('STATUS: ', deviceStatus);
