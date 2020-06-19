@@ -133,7 +133,6 @@ final class ExposureManager: NSObject {
           finish(.failure(error))
           return
         }
-
         dispatchGroup.notify(queue: .main) {
           for result in localURLResults {
             switch result {
