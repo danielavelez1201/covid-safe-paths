@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   BackHandler,
@@ -10,12 +10,12 @@ import {
   View,
 } from 'react-native';
 
-import { Images } from '../assets';
+import TracingStrategyContext from '../TracingStrategyContext';
 import { NavigationBarWrapper } from '../components/NavigationBarWrapper';
 import { Typography } from '../components/Typography';
-import { useAssets } from '../TracingStrategyAssets';
 import { NavigationProp } from '../navigation';
 
+import { Images } from '../assets';
 import { Colors, Spacing } from '../styles';
 
 type LicensesScreenProps = {
@@ -29,7 +29,8 @@ export const LicensesScreen = ({
   navigation,
 }: LicensesScreenProps): JSX.Element => {
   const { t } = useTranslation();
-  const { legalHeader } = useAssets();
+  const { useStrategyCopy } = useContext(TracingStrategyContext);
+  const { legalHeader } = useStrategyCopy(t);
 
   const legalHeaderText: string = legalHeader as string;
 

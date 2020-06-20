@@ -1,9 +1,17 @@
 import React, { createContext } from 'react';
-import { TracingStrategy } from './tracingStrategy';
+import {
+  TracingStrategy,
+  StrategyCopyContentHook,
+  StrategyInterpolatedCopyContentHook,
+  StrategyAssets,
+} from './tracingStrategy';
 import { ExposureHistoryProvider } from './ExposureHistoryContext';
 
 interface TracingStrategyContextState {
   name: string;
+  assets: StrategyAssets;
+  useStrategyCopy: StrategyCopyContentHook;
+  useInterpolatedStrategyCopy: StrategyInterpolatedCopyContentHook;
 }
 
 const defaultState = {
@@ -29,6 +37,9 @@ const TracingStrategyProvider = ({
     <TracingStrategyContext.Provider
       value={{
         name: strategy.name,
+        assets: strategy.assets,
+        useCopy: strategy.useCopy,
+        useInterpolatedCopy: strategy.useInterpolatedCopy,
       }}>
       <StrategyPermissionsProvider>
         <ExposureHistoryProvider

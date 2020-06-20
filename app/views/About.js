@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   BackHandler,
@@ -11,16 +11,17 @@ import {
   Text,
 } from 'react-native';
 
+import TracingStrategyContext from '../TracingStrategyContext';
 import packageJson from '../../package.json';
 import fontFamily from './../constants/fonts';
 import { NavigationBarWrapper, Typography } from '../components';
-import { useAssets } from '../TracingStrategyAssets';
 
 import { Colors, Spacing } from '../styles';
 
 export const AboutScreen = ({ navigation }) => {
   const { t } = useTranslation();
-  const { aboutHeader } = useAssets();
+  const { useCopy } = useContext(TracingStrategyContext);
+  const { aboutHeader } = useCopy();
 
   const backToMain = () => {
     navigation.goBack();
