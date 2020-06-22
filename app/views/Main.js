@@ -21,24 +21,21 @@ import { useStatusBarEffect } from '../navigation';
 
 export const BTMain = () => {
   useStatusBarEffect('light-content');
-  const [isAuthorizedAndEnabled, setIsAuthorizedAndEnabled] = useState(false);
   const {
     isENAuthorizedAndEnabled,
     requestENAuthorization,
-    deviceStatus,
   } = useContext(ExposureNotificationsContext);
 
-  useEffect(() => {
-    console.log('STATUS: ', deviceStatus);
-    setIsAuthorizedAndEnabled(isENAuthorizedAndEnabled());
-  }, [deviceStatus, isENAuthorizedAndEnabled]);
+  return <Foo isAuthorizedAndEnabled={isENAuthorizedAndEnabled} requestENAuthorization={requestENAuthorization} />;
+};
 
-  if (isAuthorizedAndEnabled) {
+const Foo = ({ isENAuthorizedAndEnabled, requestENAuthorization }) => {
+  if (isENAuthorizedAndEnabled) {
     return <AllServicesOnScreen />;
   } else {
     return <TracingOffScreen onPress={requestENAuthorization} />;
   }
-};
+}
 
 export const GPSMain = () => {
   useStatusBarEffect('light-content');
